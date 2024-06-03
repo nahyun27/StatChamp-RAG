@@ -1,0 +1,25 @@
+name: my_rag_model
+version: 1.0
+models:
+  - id: rag_model
+    type: langchain
+    path: app/RAG.py
+    init_args:
+      data_path: "./data/stats.csv"
+    predict_args:
+      inputs:
+        - name: input_text
+          type: string
+      outputs:
+        - name: output_text
+          type: string
+runtime:
+  type: python
+  version: 3.9
+dependencies:
+  - langchain
+  - fastapi
+  - uvicorn
+  - pandas
+  - langchain_community
+  - sentence-transformers

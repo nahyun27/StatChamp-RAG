@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "my_demo"
+version = "0.1.0"
+description = "A RAG model using LangChain"
+authors = ["Nahyun <ksknh7@hanyang.ac.kr>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.70.0"
+langchain = "^0.2.1"
+uvicorn = "^0.15.0"
+pandas = "^1.3.3"
+langchain-community = "^0.0.38"
+sentence-transformers = "^2.2.2"
+torch = "^2.1.0+cu121"  # torch 최신 버전으로 명시
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
