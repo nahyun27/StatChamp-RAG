@@ -1,34 +1,45 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>LangChain Playground</title>
     <link rel="stylesheet" type="text/css" href="/static/styles.css">
 </head>
+
 <body>
     <div class="container">
-        <h1>🤗 Best 11 Generator 🤗</h1>
+        <h1>🤗 StatChamp 🤗</h1>
         <form id="question-form" class="form">
+            <label for="sport">스포츠를 선택하세요:</label>
+            <select id="sport" name="sport">
+                <option value="baseball">Baseball</option>
+                <option value="soccer">Soccer</option>
+            </select>
+            <br><br>
             <label for="question">질문을 입력해주세요!</label>
             <input type="text" id="question" name="question">
             <input type="button" value="Submit" onclick="submitForm()">
         </form>
         <div class="output">
             <h2>Standalone Answer:</h2>
-            <p>사용자가 입력한 질문에 대해 독립적으로 생성된 답변입니다. </p>
+            <p class="desc">사용자가 입력한 질문에 대해 독립적으로 생성된 답변입니다.</p>
             <p class="answer" id="standalone-answer-text"></p>
         </div>
         <div class="output">
-            <h2>Final Answer(RAG):</h2>
-            <p>사용자가 입력한 질문과 벡터 스토어에서 검색된 관련 컨텍스트 정보를 모두 활용하여 생성된 답변입니다. 추가적인 문맥 정보를 포함하고 있어 보다 구체적이고 정확한 답변을 제공할 수 있습니다.</p>
+            <h2>RAG Answer:</h2>
+            <p class="desc">사용자가 입력한 질문과 벡터 스토어에서 검색된 관련 컨텍스트 정보를 모두 활용하여 생성된 답변입니다. 추가적인 문맥 정보를 포함하고 있어 보다 구체적이고 정확한
+                답변을 제공할 수 있습니다.</p>
             <p class="answer" id="final-answer-text"></p>
         </div>
     </div>
     <script>
         function submitForm() {
+            const sport = document.getElementById('sport').value;
             const question = document.getElementById('question').value;
             const data = {
                 chat_history: [],  // 빈 대화 기록을 초기화합니다.
-                question: question
+                question: question,
+                sport: sport
             };
 
             fetch('/local-chain', {
@@ -38,25 +49,26 @@
                 },
                 body: JSON.stringify(data)
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.standalone_answer) {
-                    document.getElementById('standalone-answer-text').textContent = data.standalone_answer;
-                } else {
-                    document.getElementById('standalone-answer-text').textContent = 'No standalone answer received';
-                }
-                if (data.final_answer) {
-                    document.getElementById('final-answer-text').textContent = data.final_answer;
-                } else {
-                    document.getElementById('final-answer-text').textContent = 'No final answer received';
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                document.getElementById('standalone-answer-text').textContent = 'Error: ' + error.message;
-                document.getElementById('final-answer-text').textContent = 'Error: ' + error.message;
-            });
+                .then(response => response.json())
+                .then(data => {
+                    if (data.standalone_answer) {
+                        document.getElementById('standalone-answer-text').textContent = data.standalone_answer;
+                    } else {
+                        document.getElementById('standalone-answer-text').textContent = 'No standalone answer received';
+                    }
+                    if (data.final_answer) {
+                        document.getElementById('final-answer-text').textContent = data.final_answer;
+                    } else {
+                        document.getElementById('final-answer-text').textContent = 'No final answer received';
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    document.getElementById('standalone-answer-text').textContent = 'Error: ' + error.message;
+                    document.getElementById('final-answer-text').textContent = 'Error: ' + error.message;
+                });
         }
     </script>
 </body>
+
 </html>

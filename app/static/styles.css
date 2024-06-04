@@ -52,15 +52,31 @@ h1 {
 }
 
 .form input[type="button"]:hover {
+  max-width: 300px;
   background-color: #0056b3;
 }
 
+select {
+  width: 30%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  text-align: center;
+}
 .output {
   margin-top: 60px;
 }
 
 .output h2 {
   color: #333333;
+}
+
+.output .desc {
+  font-weight: 100;
+  font-size: 15px;
+  color: #575757 !important;
 }
 
 .answer {

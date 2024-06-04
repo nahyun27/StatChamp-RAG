@@ -1,11 +1,15 @@
+# app/server.py
+
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import RedirectResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
-from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
+from fastapi.staticfiles import StaticFiles
 from typing import List, Tuple
 from app.RAG import initialize, predict
 
+        # What is the barrel percent of the Kyle Tucker in 2024?
+        # How is the performance of Heungmin Son in 2024?
 app = FastAPI(
     title="LangChain Server",
     version="1.0",
@@ -33,25 +37,30 @@ class ChatHistory(BaseModel):
         extra={"widget": {"type": "chat", "input": "question"}},
     )
     question: str
+    sport: str
 
-# RAG 모델 초기화
-data_path = '/data_2/ace_myyak/my-demo/data/stats.csv'
-rag_model = initialize(data_path)
+# 모델 초기화
+baseball_data_path = 'data/stats.csv'
+soccer_players_data_path = 'data/premier_league_players.csv'
+soccer_stats_data_path = 'data/premier_league_players_stats_2324.csv'
+soccer_stats_data_entire_path = 'data/premier_league_players_stats.csv'
+
+baseball_model = initialize(baseball_data_path, soccer_players_data_path, soccer_stats_data_path, soccer_stats_data_entire_path, 'baseball')
+soccer_model = initialize(baseball_data_path, soccer_players_data_path, soccer_stats_data_path, soccer_stats_data_entire_path, 'soccer')
 
 @app.post("/local-chain")
 async def run_local_chain(input_data: ChatHistory):
     try:
-        print(f"DEBUG: input_data = {input_data}")  # 디버그 메시지 추가
-        result = predict(rag_model, input_data.chat_history, input_data.question)
-        print(f"DEBUG: result = {result}")  # 디버그 메시지 추가
-        return JSONResponse(content={
-            "standalone_answer": result["standalone_answer"],
-            "final_answer": result["final_answer"]
-        })
-    except Exception as e:
-        print(f"ERROR: {e}")  # 오류 메시지 출력
-        raise HTTPException(status_code=500, detail=str(e))
+        print(f"DEBUG: input_data = {input_data}")
+        if input_data.sport == 'baseball':
+            model = baseball_model
+        elif input_data.sport == 'soccer':
+            model = soccer_model
+        else:
+            raise HTTPException(status_code=400, detail="Invalid sport type")
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+        results = predict(model, input_data.chat_history, input_data.question)
+        return JSONResponse(content=results)
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
