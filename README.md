@@ -8,6 +8,29 @@ StatChamp는 LangChain 라이브러리와 FastAPI를 사용하여 구축된 질�
 - **FastAPI 웹 인터페이스**: 사용자가 질문을 입력하고 응답을 받을 수 있는 웹 인터페이스를 제공합니다.
 - **Vector Store 기반 검색**: 유사한 문서를 검색하여 문맥 정보를 제공합니다.
 
+## 추가 문서
+
+### 프로젝트 보고서
+
+프로젝트의 자세한 설명과 기술적인 내용을 다룬 보고서는 아래 링크에서 확인할 수 있습니다:
+
+[![프로젝트 보고서](./docs/report_thumbnail.png)](./docs/report.pdf)
+[프로젝트 보고서 다운로드](./docs/report.pdf)
+
+### 프로토타입 이미지
+
+프로토타입 이미지의 전체 크기 이미지를 보려면 아래 이미지를 클릭하세요:
+
+[![프로토타입 이미지](./docs/prototype_image.png)](./docs/prototype_image.png)
+
+### 발표 자료
+
+발표 자료는 아래 링크를 통해 다운로드할 수 있습니다:
+
+[![발표 자료](./docs/presentation_thumbnail.png)](./docs/presentation.pptx)
+[발표 자료 다운로드](./docs/presentation.pptx)
+
+
 ## 설치 및 실행 방법
 
 ### LangChain CLI 설치
@@ -92,6 +115,10 @@ docker run -e OPENAI_API_KEY=$OPENAI_API_KEY -p 8080:8080 my-langserve-app
     /packages
         /extraction-openai-functions
         /vertexai-chuck-norris
+    /docs
+        - report.pdf             # 프로젝트 보고서 파일
+        - prototype_image.png    # 프로토타입 이미지 파일
+        - presentation.pdf      # 발표 자료 파일
     - .gitignore
     - Dockerfile
     - langserve.yaml
