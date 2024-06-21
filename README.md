@@ -76,7 +76,7 @@ docker run -e OPENAI_API_KEY=$OPENAI_API_KEY -p 8080:8080 my-langserve-app
 ```
 
 
-## 프로잭트 디렉토리 구조
+## 프로젝트 디렉토리 구조
 ```shell
 /my-demo
     /app
