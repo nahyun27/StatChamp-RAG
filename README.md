@@ -13,14 +13,10 @@ StatChamp는 LangChain 라이브러리와 FastAPI를 사용하여 구축된 질�
 ### 프로젝트 보고서
 
 프로젝트의 자세한 설명과 기술적인 내용을 다룬 보고서는 아래 링크에서 확인할 수 있습니다:
-
-[![프로젝트 보고서](./docs/report_thumbnail.png)](./docs/report.pdf)
+<!--[![프로젝트 보고서](./docs/report_thumbnail.png)](./docs/report.pdf)-->
 [프로젝트 보고서 다운로드](./docs/report.pdf)
 
 ### 프로토타입 이미지
-
-프로토타입 이미지의 전체 크기 이미지를 보려면 아래 이미지를 클릭하세요:
-
 [![프로토타입 이미지](./docs/prototype_image.png)](./docs/prototype_image.png)
 
 ### 발표 자료
@@ -28,7 +24,7 @@ StatChamp는 LangChain 라이브러리와 FastAPI를 사용하여 구축된 질�
 발표 자료는 아래 링크를 통해 다운로드할 수 있습니다:
 
 [![발표 자료](./docs/presentation_thumbnail.png)](./docs/presentation.pptx)
-[발표 자료 다운로드](./docs/presentation.pptx)
+[발표 자료 다운로드](./docs/presentation.pdf)
 
 
 ## 설치 및 실행 방법
