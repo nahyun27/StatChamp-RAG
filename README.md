@@ -23,7 +23,7 @@ StatChamp는 LangChain 라이브러리와 FastAPI를 사용하여 구축된 질�
 
 발표 자료는 아래 링크를 통해 다운로드할 수 있습니다:
 
-[![발표 자료](./docs/presentation_thumbnail.png)](./docs/presentation.pptx)
+[![발표 자료](./docs/presentation_thumbnail.png)](./docs/presentation.pdf)
 [발표 자료 다운로드](./docs/presentation.pdf)
 
 
